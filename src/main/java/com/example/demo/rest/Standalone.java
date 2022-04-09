@@ -32,4 +32,12 @@ public class Standalone {
         LOG.info(param * 42);
         return id + param;
     }
-}
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/v2/vulnerable/{id}")
+    public String vulnerable(@NotNull @PathParam("id") String id, @QueryParam("p") @DefaultValue("2") Integer param) {
+        LOG.info(id);
+        LOG.info(param * 42);
+        return id + param;
+    }}
