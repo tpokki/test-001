@@ -24,6 +24,13 @@ public interface Interface {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/explicit/{id}")
+    String explicit(
+            @NotNull @PathParam("id") @Pattern(regexp="^[a-z]{2,5}$") String id,
+            @QueryParam("p") @Min(0) @Max(3) @DefaultValue("2") Integer param);
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/not/{id}")
     public String notSafe(@NotNull @PathParam("id") String id, @QueryParam("p") @DefaultValue("2") Integer param);
 }

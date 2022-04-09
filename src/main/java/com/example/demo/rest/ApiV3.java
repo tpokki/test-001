@@ -4,6 +4,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -31,6 +32,20 @@ public class ApiV3 {
             @QueryParam("p") @Min(0) @Max(3) @DefaultValue("2") Integer param) {
 
         return service.badCode(id, param);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/explicit/{id}")
+    public String explicit(
+            @NotNull @PathParam("id") @Pattern(regexp="^[a-z]{2,5}$") String id,
+            @QueryParam("p") @Min(0) @Max(3) @DefaultValue("2") Integer param) {
+
+        if(param >= 0 && param < 4 && id.matches("^[a-z]{2,5}$")) {
+            return service.badCode(id, param);
+        } else {
+            throw new BadRequestException();
+        }
     }
 
     @GET
