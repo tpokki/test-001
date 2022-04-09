@@ -16,8 +16,10 @@ public class Service {
     public String badCode(String string, Integer number) {
         LOG.info(string);
         LOG.info(number * 42);
+
         if(number > 2) {
-            jdbcTemplate.queryForObject("SELECT * FROM bad_code WHERE input='"+string+"'", String.class);
+            jdbcTemplate.queryForObject("SELECT string FROM bad_code WHERE string='"+string+"'", String.class);
+            jdbcTemplate.queryForObject("SELECT number FROM bad_code WHERE number="+number, Integer.class);
         }
         return string + number;
     }
