@@ -41,7 +41,7 @@ public class ApiV3 {
             @NotNull @PathParam("id") @Pattern(regexp="^[a-z]{2,5}$") String id,
             @QueryParam("p") @Min(0) @Max(3) @DefaultValue("2") Integer param) {
 
-        if(param >= 0 && param < 4 && id.matches("^[a-z]{2,5}$")) {
+        if(param >= 0 && param < 4 && id.matches("[a-z]{2,5}")) {
             return service.badCode(id, param);
         } else {
             throw new BadRequestException();

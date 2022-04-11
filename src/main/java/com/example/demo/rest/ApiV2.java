@@ -21,7 +21,7 @@ public class ApiV2 implements Interface {
 
     @Override
     public String explicit(String id,Integer param) {
-        if(param >= 0 && param < 4 && id.matches("^[a-z]{2,5}$")) {
+        if(param >= 0 && param < 4 && id.matches("[a-z]{2,5}")) {
             return service.badCode(id, param);
         } else {
             throw new BadRequestException();
